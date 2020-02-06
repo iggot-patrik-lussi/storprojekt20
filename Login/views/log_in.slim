@@ -1,9 +1,8 @@
-h1 welcome #{session[:username]}
+h1 Welcome to India #{session[:username]}
 
 form action="/todo/#{session[:user_id]}/new" method="post"
-    input type="text" name="todo"
-    input type="submit" Value="Submit new todo"
-
+    input type="text" name="movie"
+    input type="submit" Value="Create new review"
 - if todo != nil
     ul
         - todo.each do |item|
@@ -12,7 +11,7 @@ form action="/todo/#{session[:user_id]}/new" method="post"
                 li = item["content"]
                 .right
                     form action="/lists/#{item["id"]}/delete" method="post"
-                        button type="submit" delete
+                        button type="submit" post
                         form class="todo-edit" action="/lists/#{item["id"]}/edit" method="post"
                             textarea name="content" = item["content"]
                             button type="submit" Update

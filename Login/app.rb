@@ -35,18 +35,19 @@ get('/valid')do
     
     db = SQLite3::Database.new("db/log_in.db")
     db.results_as_hash = true
-    result = db.execute("SELECT * FROM to_dos WHERE user_id = ?;", session[:user_id].to_i)
+    result = db.execute("SELECT * FROM movies WHERE user_id = ?;", session[:user_id].to_i)
 
     slim(:log_in, locals:{todo:result})
 end
 
 post('/todo/:id/new')do
 
-    content = params["todo"]
+    movie_names = params["movie"]
     user_id = params["id"]
-
+    p movie_names  
+    p user_id
     db = SQLite3::Database.new("db/log_in.db")
-    db.execute("INSERT INTO To_dos(content, user_id) VALUES(?, ?);", content, user_id)
+    db.execute("INSERT INTO movies(movie_names, user_id) VALUES(?, ?);", movie_names, user_id)
 
     redirect('/valid')
 end
@@ -58,7 +59,8 @@ post('/register')do
     db = SQLite3::Database.new("db/log_in.db")
     # db.results_as_hash = true
     pwdhash = BCrypt::Password.create(params['password'])
-
+    p pwdhash
+    p params['username']
     db.execute("INSERT INTO user(username, password_digest) VALUES(?, ?);", params['username'], pwdhash)
 
     redirect("/")
