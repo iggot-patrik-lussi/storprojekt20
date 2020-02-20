@@ -36,14 +36,17 @@ get('/valid')do
     db = SQLite3::Database.new("db/log_in.db")
     db.results_as_hash = true
     result = db.execute("SELECT * FROM movies WHERE user_id = ?;", session[:user_id].to_i)
+    p result
+  
 
-    slim(:log_in, locals:{todo:result})
+    slim(:main, locals:{todo:result})
 end
 
 post('/todo/:id/new')do
 
     movie_names = params["movie"]
     user_id = params["id"]
+    
     p movie_names  
     p user_id
     db = SQLite3::Database.new("db/log_in.db")
@@ -71,7 +74,7 @@ post('/lists/:id/delete')do
     item_id = params["id"]
     db = SQLite3::Database.new("db/log_in.db")
 
-    db.execute("DELETE FROM to_dos WHERE id = ?;", item_id)
+    db.execute("DELETE FROM movies WHERE id = ?;", item_id)
 
     redirect('/valid')
 end
