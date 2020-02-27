@@ -24,7 +24,7 @@ post('/login') do
 
 
     if BCrypt::Password.new(pwdhash[0]["password_digest"]) == password
-        redirect("/valid")
+        redirect("/main")
     else
         redirect("/Invalid")
     end
@@ -36,11 +36,17 @@ get('/valid')do
     db = SQLite3::Database.new("db/log_in.db")
     db.results_as_hash = true
     result = db.execute("SELECT * FROM movies WHERE user_id = ?;", session[:user_id].to_i)
-    p result
-  
 
-    slim(:main, locals:{todo:result})
+
+   
+    slim(:log_in, locals:{todo:result})
 end
+
+get('/main') do 
+
+slim(:main)
+end 
+ 
 
 post('/todo/:id/new')do
 
@@ -58,6 +64,7 @@ end
 def set_error(error_message)
     session[:error] = error_message
 end
+
 post('/register')do
     db = SQLite3::Database.new("db/log_in.db")
     # db.results_as_hash = true
@@ -90,4 +97,3 @@ db.execute("UPDATE to_dos SET content = '#{content}' WHERE id = '#{item_id}';")
 
 redirect('/valid')
 end
-

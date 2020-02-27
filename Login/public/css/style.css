@@ -1,10 +1,33 @@
 body{
     padding-top: 70px;
     padding-left: 70px;
-    background: red;
+    background: white;
     font-size: 50;
+    font-family: 'Trade Winds' ;
+    
 }
 
-.ja {
-    margin:5px;
+button {
+    background:blue ;
+    margin-right: 50px;
+    margin-left: 150px;
+    height: 100px;
+    width: 200px;
+    border: none;
+} 
+
+input {
+    color:red;
+    margin-right: 50px;
 }
+
+a {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    background: red;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
