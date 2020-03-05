@@ -16,18 +16,17 @@ button {
     border: none;
 } 
 
-input {
-    color:red;
-    margin-right: 50px;
-}
 
 a {
     display: inline-block;
     width: 200px;
     height: 50px;
-    background: red;
+    background: green;
     text-align: center;
     text-decoration: none;
     color: white;
+    outline: black 2px solid;
+   
+   
 }
 

@@ -31,7 +31,7 @@ post('/login') do
     
 end
 
-get('/valid')do
+get('/Valid')do
     
     db = SQLite3::Database.new("db/log_in.db")
     db.results_as_hash = true
@@ -53,12 +53,11 @@ post('/todo/:id/new')do
     movie_names = params["movie"]
     user_id = params["id"]
     
-    p movie_names  
-    p user_id
+   
     db = SQLite3::Database.new("db/log_in.db")
     db.execute("INSERT INTO movies(movie_names, user_id) VALUES(?, ?);", movie_names, user_id)
 
-    redirect('/valid')
+    redirect('/review')
 end
 
 def set_error(error_message)
@@ -78,22 +77,29 @@ end
 
 post('/lists/:id/delete')do
 
-    item_id = params["id"]
+    id = params["id"]
     db = SQLite3::Database.new("db/log_in.db")
 
-    db.execute("DELETE FROM movies WHERE id = ?;", item_id)
+    db.execute("DELETE FROM movies WHERE id = ?;", id)
 
-    redirect('/valid')
+    redirect('/main')
 end
 
 post('/lists/:id/edit')do
 
-item_id = params["id"]
-content = params["content"]
+id = params["id"]
+movie_names = params["content"]
 
 db = SQLite3::Database.new("db/log_in.db")
 
-db.execute("UPDATE to_dos SET content = '#{content}' WHERE id = '#{item_id}';")
+db.execute("UPDATE movies SET content = '#{content}' WHERE id = '#{item_id}';")
 
 redirect('/valid')
 end
+
+get('/review') do 
+
+
+
+slim(:reviews)
+end 

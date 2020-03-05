@@ -1,20 +1,5 @@
-h1 Welcome to India #{session[:username]}
+h1 Create new review #{session[:username]}
 
 form action="/todo/#{session[:user_id]}/new" method="post"
     input type="text" name="movie"
     input type="submit" Value="Create new review"
-
-- if todo != nil
-    ul
-        - todo.each do |item|
-            h1 = item["movie_names"]
-            hr
-            .todo-item
-                li = item["movie_names"]
-                .right 
-                    form action="/lists/#{item["id"]}/delete" method="post"
-                        button type="submit" Submit
-                        form class="todo-edit" action="/lists/#{item["id"]}/edit" method="post"
-                            textarea name="content" = item["content"]
-                            button type="submit" Update
-
