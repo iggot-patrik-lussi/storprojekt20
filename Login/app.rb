@@ -57,7 +57,7 @@ post('/todo/:id/new')do
     db = SQLite3::Database.new("db/log_in.db")
     db.execute("INSERT INTO movies(movie_names, user_id) VALUES(?, ?);", movie_names, user_id)
 
-    redirect('/review')
+    redirect('/bountycreate')
 end
 
 def set_error(error_message)
@@ -97,9 +97,16 @@ db.execute("UPDATE movies SET content = '#{content}' WHERE id = '#{item_id}';")
 redirect('/valid')
 end
 
-get('/review') do 
+get('/bountycreate') do 
 
 
 
-slim(:reviews)
+slim(:bountycreate)
+end 
+
+post('/bounty/:id/new') do 
+    
+    db = SQLite3::Database.new("db/log_in.db")
+    db.execute("INSERT INTO bountyinfo( id, price, contents) VALUES(?, ?,?);",contents , price ,id)
+    redirect('/main')
 end 
