@@ -46,9 +46,13 @@ get('/main') do
 
 slim(:main)
 end 
- 
 
-post('/todo/:id/new')do
+get('/bountylist') do 
+
+slim(:bountylist)
+end 
+
+post('/bounti/:id/new')do
 
     movie_names = params["movie"]
     user_id = params["id"]
@@ -80,7 +84,7 @@ post('/lists/:id/delete')do
     id = params["id"]
     db = SQLite3::Database.new("db/log_in.db")
 
-    db.execute("DELETE FROM movies WHERE id = ?;", id)
+    db.execute("DELETE FROM bountyinfo WHERE id = ?;", id)
 
     redirect('/main')
 end
@@ -92,7 +96,7 @@ movie_names = params["content"]
 
 db = SQLite3::Database.new("db/log_in.db")
 
-db.execute("UPDATE movies SET content = '#{content}' WHERE id = '#{item_id}';")
+db.execute("UPDATE bountyinfo SET content = '#{content}' WHERE id = '#{item_id}';")
 
 redirect('/valid')
 end
@@ -107,6 +111,7 @@ end
 post('/bounty/:id/new') do 
     
     db = SQLite3::Database.new("db/log_in.db")
-    db.execute("INSERT INTO bountyinfo( id, price, contents) VALUES(?, ?,?);",contents , price ,id)
+    db.execute("INSERT INTO bountyinfo( id, price,contents) VALUES(?,?,?);",contents , price ,id) 
+
     redirect('/main')
 end 
