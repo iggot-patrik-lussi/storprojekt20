@@ -1,0 +1,14 @@
+
+h1 Edit your bounty on #{res["name"]}
+
+form action="/bounty/edit/#{res['id']}" method="post"
+    input type="text" name="name" placeholder = "name"
+    br
+    input type="file" name="file"
+    br
+    textarea# name="contents" cols="30" rows="10" placeholder = "info about bounty"
+    br
+    input type="text" name="price" placeholder = "price"
+    br
+    input type="submit" Value="Update bounty" 
+

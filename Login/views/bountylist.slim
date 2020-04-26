@@ -1,7 +1,13 @@
+a href="/main"
 h1 My bounties 
 
 - res.each do |r| 
     h2 = r["name"]
     p = r["contents"]
     h5 Price #{r["price"]}
+    form action="/bounty/delete/#{r['id']} " method="post"
+        button type = "submit" delete 
+    form action="/bounty/edit/#{r['id']} " method="get"
+        button type = "submit" edit     
     br 
+    

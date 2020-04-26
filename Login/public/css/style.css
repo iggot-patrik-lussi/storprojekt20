@@ -1,20 +1,9 @@
 body{
-    padding-top: 70px;
-    padding-left: 70px;
     background: white;
     font-size: 50;
     font-family: 'Trade Winds' ;
     
 }
-
-button {
-    background:blue ;
-    margin-right: 50px;
-    margin-left: 150px;
-    height: 100px;
-    width: 200px;
-    border: none;
-} 
 
 
 a {

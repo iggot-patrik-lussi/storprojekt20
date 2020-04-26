@@ -31,16 +31,7 @@ post('/login') do
     
 end
 
-get('/Valid')do
-    
-    db = SQLite3::Database.new("db/log_in.db")
-    db.results_as_hash = true
-    result = db.execute("SELECT * FROM movies WHERE user_id = ?;", session[:user_id].to_i)
 
-
-   
-    slim(:log_in, locals:{todo:result})
-end
 
 get('/main') do 
 
@@ -55,6 +46,37 @@ get('/bountylist') do
 
     slim(:bountylist,locals:{res:result})
 end 
+
+get('/browsebounties') do 
+    db = SQLite3::Database.new("db/log_in.db")
+    db.results_as_hash = true
+    result = db.execute("SELECT * FROM bountyinfo;")
+
+    slim(:browsebounties,locals:{res:result})
+end 
+
+post('/bounty/delete/:id') do 
+    db = SQLite3::Database.new("db/log_in.db")
+    db.execute("DELETE FROM bountyinfo WHERE id = ?;", params[:id])
+    redirect(back)
+
+end 
+
+get('/bounty/edit/:id') do
+    db = SQLite3::Database.new("db/log_in.db")
+    db.results_as_hash = true
+    result = db.execute("SELECT * FROM bountyinfo WHERE id = ?;", params[:id].to_i).first
+    
+    slim(:bountyedit, locals:{res:result})
+end 
+
+post('/bounty/edit/:id') do 
+    db = SQLite3::Database.new("db/log_in.db")
+    db.results_as_hash = true
+    db.execute("UPDATE bountyinfo SET contents = ?,name = ?,price = ? ;", params[:contents],params[:name],params[:price])
+    redirect("/bountylist")
+end 
+
 
 
 post('/bounty/:id/new')do
