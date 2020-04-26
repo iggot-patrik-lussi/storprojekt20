@@ -1,5 +1,6 @@
 #App.rb innehåller alla routes och allt som uppgör sidan. De olika routsen utgör olika sidor till hemsidan och det är så man går mellan de
 #I början så är alla olika saker som används till att bygga upp sidan requirade som t.ex. sinatra eller slim. 
+#Sedan har jag olika routes som för det mesta har namngets med restfull routes för att göra det mindre förvirrande för en läsare att kunna granska koden.
 
 
 require 'sinatra'
@@ -95,9 +96,6 @@ post('/bounty/:id/new')do
     redirect('/bountycreate')
 end
 
-def set_error(error_message)
-    session[:error] = error_message
-end
 
 post('/register')do
     db = SQLite3::Database.new("db/log_in.db")
