@@ -1,3 +1,7 @@
+#App.rb innehåller alla routes och allt som uppgör sidan. De olika routsen utgör olika sidor till hemsidan och det är så man går mellan de
+#I början så är alla olika saker som används till att bygga upp sidan requirade som t.ex. sinatra eller slim. 
+
+
 require 'sinatra'
 require 'slim'
 require 'sqlite3'
