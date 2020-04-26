@@ -1,9 +1,14 @@
 h1 Create your bounty
+h1 hello
 
-
-form action="/bounty/#{session[:user_id]}/new" method="post" 
+form action="/bounty/new" method="post"
+    input type="text" name="name" placeholder = "name"
+    br
     input type="file" name="file"
-    textarea# name="contents" cols="30" rows="10" 
-    input type="text" name="price"
+    br
+    textarea# name="contents" cols="30" rows="10" placeholder = "info about bounty"
+    br
+    input type="text" name="price" placeholder = "price"
+    br
     input type="submit" Value="Create new bounty" 
 

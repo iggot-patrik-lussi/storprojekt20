@@ -102,16 +102,18 @@ redirect('/valid')
 end
 
 get('/bountycreate') do 
-
+p "hello epic very epic"
 
 
 slim(:bountycreate)
 end 
 
-post('/bounty/:id/new') do 
-    
+post('/bounty/new') do 
+    name = params["name"]
+    contents = params["contents"]
+    price = params["price"]
     db = SQLite3::Database.new("db/log_in.db")
-    db.execute("INSERT INTO bountyinfo( id, price,contents) VALUES(?,?,?);",contents , price ,id) 
+    db.execute("INSERT INTO bountyinfo( price,contents,name) VALUES(?,?,?);",price ,contents,name) 
 
     redirect('/main')
 end 
