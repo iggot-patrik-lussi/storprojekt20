@@ -44,15 +44,20 @@ end
 
 get('/main') do 
 
-slim(:main)
+    slim(:main)
 end 
+
 
 get('/bountylist') do 
+    db = SQLite3::Database.new("db/log_in.db")
+    db.results_as_hash = true
+    result = db.execute("SELECT * FROM bountyinfo WHERE user_id = ?;", session[:user_id].to_i)
 
-slim(:bountylist)
+    slim(:bountylist,locals:{res:result})
 end 
 
-post('/bounti/:id/new')do
+
+post('/bounty/:id/new')do
 
     movie_names = params["movie"]
     user_id = params["id"]
@@ -91,29 +96,29 @@ end
 
 post('/lists/:id/edit')do
 
-id = params["id"]
-movie_names = params["content"]
+    id = params["id"]
+    movie_names = params["content"]
 
-db = SQLite3::Database.new("db/log_in.db")
+    db = SQLite3::Database.new("db/log_in.db")
 
-db.execute("UPDATE bountyinfo SET content = '#{content}' WHERE id = '#{item_id}';")
+    db.execute("UPDATE bountyinfo SET content = '#{content}' WHERE id = '#{item_id}';")
 
-redirect('/valid')
+    redirect('/valid')
 end
 
 get('/bountycreate') do 
-p "hello epic very epic"
-
-
-slim(:bountycreate)
+    slim(:bountycreate)
 end 
 
 post('/bounty/new') do 
+    if(session[:user_id] == nil) 
+        return redirect("/main")
+    end 
+    user_id = session[:user_id]
     name = params["name"]
     contents = params["contents"]
     price = params["price"]
     db = SQLite3::Database.new("db/log_in.db")
-    db.execute("INSERT INTO bountyinfo( price,contents,name) VALUES(?,?,?);",price ,contents,name) 
-
+    db.execute("INSERT INTO bountyinfo( price,contents,name,user_id) VALUES(?,?,?,?);",price ,contents,name,user_id) 
     redirect('/main')
 end 
